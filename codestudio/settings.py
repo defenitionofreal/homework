@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'x$=ng0ei4w)i14bjoi2cq7-hd11oemif(46+-$dp59*dl9md+#'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -142,8 +142,8 @@ EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 2525
 #EMAIL_USE_SSL = True
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'iwebpro.ru@mail.ru'
-EMAIL_HOST_PASSWORD = 'Mail4Django_prjs'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 #DEFAULT_FROM_EMAIL = 'No reply <noreply@mail.ru>'
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
