@@ -20,7 +20,7 @@ def index(request):
             name = form.cleaned_data['name']
             from_email = form.cleaned_data['from_email']
             try:
-                send_mail(name, from_email, 'iwebpro.ru@mail.ru', ['test@codestudio.org'], fail_silently=False,)
+                send_mail(name, from_email, 'from@who', ['to@who'], fail_silently=False,)
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return HttpResponseRedirect('success')
