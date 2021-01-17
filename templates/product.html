@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block seo %}
+	<title>{{ product.get_seo_title }}</title>
+    <meta name="description" content="{{ product.get_seo_description }}"/>
+    <meta name="keywords" content="{{ product.get_seo_keywords }}"/>
+{% endblock %}
+{% block content %}
+<div class="wrapper">
+        <div class="content">
+            <a href="{% url 'main:index' %}" class="go-back">На главную</a>
+            <h1>{% if product.title %}
+                {{ product.title }}
+                {%  else %}
+                Заголовок первого уровня
+                {% endif %}</h1>
+
+            {% if product.img %}
+            {% thumbnail product.img "1280x1024" crop="center" as img %}
+            <img src="{{ img.url }}" alt="{{ product.title }}" class="product-image">
+            {% endthumbnail %}
+            {% endif %}
+
+{% if product.productlisttitle.all %}
+            <div class="product-info">
+{% for list in product.productlisttitle.all %}
+                <div class="product-info-item">
+                    <h2>{{ list.title }}</h2>
+                    <ul>
+                       {% for item in list.productlistitem.all %}
+                        <li>{{ item.item }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+{% endfor %}
+
+            </div>
+{% endif %}
+        </div>
+    </div>
+{% endblock %}
+

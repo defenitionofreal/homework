@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load l10n %}
+
+{% block seo %}
+{% for main in main %}
+	<title>{{ main.get_seo_title }}</title>
+    <meta name="description" content="{{ main.get_seo_description }}"/>
+    <meta name="keywords" content="{{ main.get_seo_keywords }}"/>
+{% endfor %}
+{% endblock %}
+
+{% block content %}
+<div class="wrapper">
+        <div class="content">
+            <h1>
+                {% for main in main %}
+                {% if main.title %}
+                {{ main.title }}
+                {%  else %}
+                Заголовок первого уровня
+                {% endif %}
+                {% endfor %}
+            </h1>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    {% if img %}
+                    {% for img in img %}
+                    {% thumbnail img.images "1280x860" crop="center" as img %}
+                    <div class="swiper-slide"><img src="{{ img.url }}" alt="Картинка"></div>
+                    {% endthumbnail %}
+                    {% endfor %}
+                    {% else %}
+
+                    {% endif %}
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+            <div class="intro-text">
+                {% if text %}
+                {% for text in text %}
+                <p>{{ text.text|linebreaks }}</p>
+                {% endfor %}
+                {%  else %}
+                <p>По мнению учёных, Земля образовалась 4,54 млрд лет назад из межзвёздного газопылевого облака, наряду с Солнцем и другими планетами. Луна сформировалась примерно на 20 млн лет позже в результате столкновения массивного тела с Землёй. Расплавленный наружный слой Земли со временем охлаждался, в результате чего сформировалась твёрдая оболочка — кора.</p>
+                <p>Выделение газов и вулканическая активность привели к возникновению первичной атмосферы. Конденсация водяного пара (большинство которого образовалось изо льда комет) привела к возникновению океанов и других водных ресурсов, после чего высокоэнергетическая химия привела к возникновению самовоспроизводящейся молекулы около 4 млрд лет назад.</p>
+                <p>Поверхность Земли менялась на протяжении сотен миллионов лет, время от времени объединяясь в суперконтинент, а затем снова распадаясь на отдельные континенты. Примерно 750 млн лет назад начал разделяться самый древний из известных суперконтинентов — Родиния. Через некоторое время континенты снова соединились и сформировали Паннотию, которая разъединилась около 540 млн лет назад.
+                <p>Затем образовался последний суперконтинент — Пангея, который разделился около 180 млн лет назад.</p>
+                {% endif %}
+            </div>
+            <div class="products-list">
+                <h2>Продукты</h2>
+                <ul>
+                    {% if products %}
+                    {% for product in products %}
+                    <li><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></li>
+                    {% endfor %}
+                    {% else %}
+                    no products yet.
+                    {% endif %}
+                </ul>
+            </div>
+            {% if map %}
+            {% for map in map %}
+               <div id="map" data-latitude="{{ map.lat|unlocalize }}" data-longitude="{{ map.lon|unlocalize }}"></div>
+            {% endfor %}
+            {%  else %}
+            <div id="map" data-latitude="55.76" data-longitude="37.64"></div>
+            {% endif %}
+            <h2>Отправить сообщение</h2>
+            <form id="form" method="post">
+                {% csrf_token %}
+                {{ form }}
+<input type="submit" value="Отправить" class="button" onclick="event.preventDefault();onSubmitEvent()">
+            </form>
+        </div>
+    </div>
+{% endblock %}
